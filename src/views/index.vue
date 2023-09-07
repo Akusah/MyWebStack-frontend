@@ -149,7 +149,6 @@ onBeforeMount(() => {
 
   getUserByToken().then((data) => {
     LOGINUSER = data
-    // console.log(LOGINUSER);
     const str = JSON.stringify(LOGINUSER)
     localStorage.setItem("LOGINUSER", str)
   })

@@ -53,7 +53,7 @@ import { loginApiUser } from '@/api/user'
 import { ElMessage } from 'element-plus';
 
 const loginForm = reactive({
-  username:'zhangsan',
+  username:'wangwu',
   password:'123456'
 })
 

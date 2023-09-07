@@ -26,6 +26,7 @@
 import router from "@/router";
 
 import { useRoute } from "vue-router";
+import { addPageview } from '@/api/web'
 
 const route = useRoute();
 const props = defineProps({
@@ -39,6 +40,7 @@ const toWebPage = (webId) =>{
       webId: webId
     }
   };
+  addPageview(webId)
   router.push(routePath)
 }
 </script>

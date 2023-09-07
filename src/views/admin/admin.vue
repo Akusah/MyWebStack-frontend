@@ -100,13 +100,13 @@
   <style scoped>
   .layout-container-demo .el-header {
     position: relative;
-    background-color: var(--el-color-primary-light-7);
+    background-color: #e2e1e4;
     color: var(--el-text-color-primary);
   }
   
   .layout-container-demo .el-aside {
-    color: var(--el-text-color-primary);
-    background: var(--el-color-primary-light-8);
+    color: black;
+    background: #cdd1d3;
   }
   
   .layout-container-demo .el-menu {
@@ -123,5 +123,9 @@
     justify-content: center;
     height: 100%;
     right: 20px;
+  }
+  .el-menu-item {
+    color: #74787a;
+    background: #cdd1d3;
   }
   </style>

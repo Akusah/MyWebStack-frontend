@@ -5,7 +5,7 @@ import router from "@/router";
 const authItemName = "access_token";
 
 //取出token
-const takeAccessToken = () => {
+export const takeAccessToken = () => {
   const str = localStorage.getItem(authItemName);
   if (!str) return null;
   const authObj = JSON.parse(str);
@@ -42,7 +42,7 @@ export const getWebList = async () => {
   try {
     const response = await instance.get("sys/category/getCategoryList", {
       headers: {
-        Authorization: `Bearer ${takeAccessToken()}`,
+        'Authorization': `Bearer ${takeAccessToken()}`,
       },
       withCredentials: true,
     });
@@ -64,7 +64,7 @@ export const getWebListUnderCategory = async () => {
       "sys/category/getWebListUnderCategory",
       {
         headers: {
-          Authorization: `Bearer ${takeAccessToken()}`,
+          'Authorization': `Bearer ${takeAccessToken()}`,
         },
         withCredentials: true,
       }
@@ -82,30 +82,23 @@ export const getWebListUnderCategory = async () => {
   }
 };
 
-export const addPageview = async (requestBody) => {
+export const addPageview = async (webId) => {
   try {
-    const response = await instance.post(
-      "/sys/webinfo/addCount/",
-      requestBody,
-      {
-        headers: {
-          Authorization: `Bearer ${takeAccessToken()}`,
-        },
-        withCredentials: true,
-      }
-    );
+    const response = await instance.post("sys/webinfo/addCount/"+ webId,{}, {
+      headers: {
+          'Authorization': `Bearer ${takeAccessToken()}`,
+      },
+      withCredentials:true
+    });
     console.log(response.data);
-    const { code, message, data } = response.data;
-    if (code === 200) {
-      console.log(message);
-    } else {
-      ElMessage.error(message);
-    }
   } catch (error) {
     console.error(error);
     ElMessage.error("网络错误，请稍后重试！");
   }
 };
+
+
+
 
 export const getWebById = async (webId) => {
   try {
@@ -218,4 +211,91 @@ export const updateWebInfo = async (requestBody) => {
 };
 
 
+export const addCategory = async (requestBody) => {
+  console.log(requestBody);
+  try {
+    const response = await instance.post("/api/admin/addCategory", requestBody, {
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${takeAccessToken()}`,
+      },
+      withCredentials:true
+    });
+    const { code, message, data } = response.data;
+    if (code === 200) {
+      ElMessage.success("添加成功！");
+    } else {
+      ElMessage.error(message);
+    }
+  } catch (error) {
+    console.error(error);
+    ElMessage.error("网络错误，请稍后重试！");
+  }
+};
 
+
+export const deleteCategory = async (requestBody) => {
+  try {
+    const response = await instance.post("/api/admin/deleteCategory", requestBody, {
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${takeAccessToken()}`,
+      },
+      withCredentials:true
+    });
+    const { code, message, data } = response.data;
+    if (code === 200) {
+      ElMessage.success("删除成功！");
+    } else {
+      ElMessage.error(message);
+    }
+  } catch (error) {
+    console.error(error);
+    ElMessage.error("网络错误，请稍后重试！");
+  }
+};
+
+
+export const addWeb = async (requestBody) => {
+  console.log(requestBody);
+  try {
+    const response = await instance.post("/api/admin/addWeb", requestBody, {
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${takeAccessToken()}`,
+      },
+      withCredentials:true
+    });
+    const { code, message, data } = response.data;
+    if (code === 200) {
+      ElMessage.success("添加成功！");
+    } else {
+      ElMessage.error(message);
+    }
+  } catch (error) {
+    console.error(error);
+    ElMessage.error("网络错误，请稍后重试！");
+  }
+};
+
+
+export const uploadFile = async (requestBody) => {
+  try {
+    const response = await instance.post("/api/admin/uploadFile", requestBody, {
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${takeAccessToken()}`,
+      },
+      withCredentials:true
+    });
+    const { code, message, data } = response.data;
+    if (code === 200) {
+      ElMessage.success("上传成功！");
+    } else {
+      ElMessage.error(message);
+    }
+  } catch (error) {
+    console.error(error);
+    ElMessage.error("网络错误，请稍后重试！");
+  }
+};
